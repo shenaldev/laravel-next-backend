@@ -7,7 +7,7 @@ use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware("guest")->group(function () {
+Route::middleware("api")->group(function () {
     Route::post('/register', RegisterController::class);
     Route::post('/login', LoginController::class);
 
@@ -24,7 +24,7 @@ Route::middleware("guest")->group(function () {
 });
 
 //AUTHENTICATED ROUTES
-Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('/check-token', [AuthController::class, 'checkToken']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
