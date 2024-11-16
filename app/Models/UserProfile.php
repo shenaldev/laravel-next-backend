@@ -8,6 +8,7 @@ class UserProfile extends Model
 {
     protected $fillable = [
         'avatar',
+        'user_id'
     ];
 
     /**
