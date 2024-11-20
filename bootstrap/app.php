@@ -13,6 +13,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $authCookie = env('AUTH_COOKIE_NAME');
+
+        $middleware->encryptCookies(except: [
+            $authCookie,
+            'app-token',
+        ]);
+
         $middleware->statefulApi();
         $middleware->api('throttle:api');
         $middleware->prependToGroup('api', CheckForAuthToken::class);
